@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    environment: 
+      POSTGRES_USER: eco_user
+      POSTGRES_PASSWORD:  eco_password
+      POSTGRES_DB: ecotrans_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postres_data:/var/lib/postresql/data
+
+volumes:
+  postres_data:
